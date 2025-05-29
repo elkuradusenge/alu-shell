@@ -1,0 +1,2 @@
+#!/bin/bash
+dd if=/tmp/input of=/tmp/output bs=1 skip=143 count=1 2>/dev/null && cat /tmp/output
