@@ -1,3 +1,2 @@
 #!/bin/bash
-create_file="\\*\\?\$\\!\\*\\*Holberton School\\"
-echo "Best School" > "$create_file"
+echo "Best School" > "\*\?\$\!\*\*Holberton School"
