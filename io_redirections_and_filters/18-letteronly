@@ -1,2 +1,2 @@
 #!/bin/bash
-while read line; do [ "${line:0:1}" != "${line:0:1//[[:alpha:]]/}" ] && echo "$line"; done < /etc/ssh/sshd_config
+grep ^[a-zA-Z] /etc/ssh/sshd_config
