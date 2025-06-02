@@ -75,13 +75,13 @@ EOF
 
 scripts["11-directories"]=$(cat <<'EOF'
 #!/bin/bash
-find . -type d | wc -l
+find . -type d ! -path . | wc -l
 EOF
 )
 
 scripts["12-newest_files"]=$(cat <<'EOF'
 #!/bin/bash
-ls -t | head -n 1
+ls -tp | grep -v / | head -n 10
 EOF
 )
 
@@ -111,7 +111,7 @@ EOF
 
 scripts["17-hidethisword"]=$(cat <<'EOF'
 #!/bin/bash
-grep -v "root" /etc/passwd
+grep -v "bin" /etc/passwd
 EOF
 )
 
@@ -159,7 +159,7 @@ EOF
 
 scripts["25-acrostic"]=$(cat <<'EOF'
 #!/bin/bash
-cut -c1
+cut -c1 | paste -sd ""
 EOF
 )
 
