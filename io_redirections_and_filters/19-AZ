@@ -1,2 +1,2 @@
 #!/bin/bash
-(tr 'Ac' 'Ze'; printf '\n')
+awk '{gsub(/A/,"Z"); gsub(/c/,"e"); print}'
