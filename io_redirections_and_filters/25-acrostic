@@ -1,2 +1,2 @@
 #!/bin/bash
-while IFS= read -r l; do printf "${l:0:1}"; done; echo
+cut -c1 | tr -d '\n' | sort
