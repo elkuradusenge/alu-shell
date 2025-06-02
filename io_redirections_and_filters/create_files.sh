@@ -148,7 +148,8 @@ EOF
 
 scripts["23-empty_casks"]=$(cat <<'EOF'
 #!/bin/bash
-find . -type f -empty
+find . -empty | rev | cut --delimiter='/' -f1 | rev
+
 EOF
 )
 
