@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 # Parsing apache logs - grouping visitors by IP and HTTP status code
 
-awk -F' ' '{ print $1 " " $9 }' apache-access.log | awk '{
-    # Count occurrences of each IP and status code combination
-    count[$0]++
+awk -F' ' '{ 
+    if (NF >= 9 && $1 != "" && $9 != "") {
+        key = $1 " " $9
+        count[key]++
+    }
 }
 END {
-    # Output in format: OCCURRENCE_NUMBER IP HTTP_CODE
+    PROCINFO["sorted_in"] = "@val_num_desc"
     for (combo in count) {
         print count[combo], combo
     }
-}' | sort -nr
+}' apache-access.log
