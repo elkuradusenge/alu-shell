@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
-# adding comment 
-awk -F' ' '{ print $1 " " $9 }' apache-access.log | sort | uniq -c | sort -nr
+# This script groups Apache log data by IP and HTTP status code and displays sorted counts
+
+awk '{ print $1, $9 }' apache-access.log | sort | uniq -c | sort -nr
