@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
-# Group visitors by IP and HTTP code, and display sorted list
+# Group visitors by IP and HTTP status code, then sort by frequency
 
-awk 'NF >= 9 { print $1, $9 }' | sort | uniq -c | sort -nr
+awk '{ ip=$1; code=$9; if (ip != "" && code ~ /^[0-9]+$/) count[ip,code]++ }
+     END {
+         for (pair in count) {
+             split(pair, a, SUBSEP)
+             printf "%7d %s %s\n", count[pair], a[1], a[2]
+         }
+     }' | sort -nr
