@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# This script reads /etc/passwd and displays username:user id:home directory
-
-while IFS=: read -r username _ userid _ _ home _; do
-  echo "$username:$userid:$home"
-done < /etc/passwd
+while IFS= read -r line
+do
+    echo "$line" | cut -f 1,3,6 -d ':'
+done < "/etc/passwd"
