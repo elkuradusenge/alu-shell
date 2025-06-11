@@ -1,10 +1,4 @@
 #!/usr/bin/env bash
-# Group visitors by IP and HTTP status code, then sort by frequency
+# Parses Apache log files in list format.
 
-awk '{ ip=$1; code=$9; if (ip != "" && code ~ /^[0-9]+$/) count[ip,code]++ }
-     END {
-         for (pair in count) {
-             split(pair, a, SUBSEP)
-             printf "%7d %s %s\n", count[pair], a[1], a[2]
-         }
-     }' | sort -nr
+awk '{ print $1 " " $9}' apache-access.log | sort | uniq -c | sort -rn
