@@ -1,15 +1,4 @@
 #!/usr/bin/env bash
-# Parsing apache logs - grouping visitors by IP and HTTP status code
+# Parses Apache log files in list format.
 
-awk -F' ' '{ 
-    if (NF >= 9 && $1 != "" && $9 != "") {
-        key = $1 " " $9
-        count[key]++
-    }
-}
-END {
-    PROCINFO["sorted_in"] = "@val_num_desc"
-    for (combo in count) {
-        print count[combo], combo
-    }
-}' apache-access.log
+awk '{ print $1 " " $9}' apache-access.log | sort | uniq -c | sort -rn
