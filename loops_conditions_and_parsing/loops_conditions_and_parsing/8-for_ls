@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# This script lists current directory contents without hidden files and shows only the part after the first dash
+
+for file in *; do
+  if [[ "$file" == *-* ]]; then
+    echo "${file#*-}"
+  else
+    echo "$file"
+  fi
+done
