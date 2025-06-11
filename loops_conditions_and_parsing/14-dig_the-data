@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-# This script processes Apache logs to group by IP and HTTP code, and sort by frequency
+# Group visitors by IP and HTTP code, and display sorted list
 
-awk 'NF >= 9 { print $1, $9 }' apache-access.log | sort | uniq -c | sort -nr
+awk 'NF >= 9 { print $1, $9 }' | sort | uniq -c | sort -nr
