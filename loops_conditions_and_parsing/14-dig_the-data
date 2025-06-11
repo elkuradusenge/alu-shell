@@ -1,4 +1,13 @@
 #!/usr/bin/env bash
-# Parses Apache log files in list format.
+# Parsing apache logs - grouping visitors by IP and HTTP status code
 
-awk '{print $1" "$9}' apache-access.log | sort | uniq -c | sort -rn
+awk -F' ' '{ print $1 " " $9 }' apache-access.log | awk '{
+    # Count occurrences of each IP and status code combination
+    count[$0]++
+}
+END {
+    # Output in format: OCCURRENCE_NUMBER IP HTTP_CODE
+    for (combo in count) {
+        print count[combo], combo
+    }
+}' | sort -nr
