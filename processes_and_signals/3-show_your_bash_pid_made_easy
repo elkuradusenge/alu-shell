@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# This script shows the PID of Bash processes using /proc
 for pid in $(ls /proc | grep -E "^[0-9]+$"); do
     cmdline=$(cat /proc/"$pid"/comm 2>/dev/null)
     if [[ "$cmdline" == *bash* ]]; then

@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# This script saves its PID in a file and traps termination signals
 PIDFILE="/var/run/myscript.pid"
 echo $$ > "$PIDFILE"
 trap "echo 'I hate the kill command'" SIGTERM
