@@ -1,0 +1,30 @@
+#!/bin/bash
+PIDFILE="/var/run/my_process.pid"
+SCRIPT="./manage_my_process"
+case "$1" in
+    start)
+        nohup "$SCRIPT" >/dev/null 2>&1 &
+        echo $! > "$PIDFILE"
+        echo "manage_my_process started"
+        ;;
+    stop)
+        if [ -f "$PIDFILE" ]; then
+            kill "$(cat "$PIDFILE")"
+            rm -f "$PIDFILE"
+            echo "manage_my_process stopped"
+        fi
+        ;;
+    restart)
+        if [ -f "$PIDFILE" ]; then
+            kill "$(cat "$PIDFILE")"
+            rm -f "$PIDFILE"
+        fi
+        nohup "$SCRIPT" >/dev/null 2>&1 &
+        echo $! > "$PIDFILE"
+        echo "manage_my_process restarted"
+        ;;
+    *)
+        echo "Usage: manage_my_process {start|stop|restart}"
+        exit 1
+        ;;
+esac

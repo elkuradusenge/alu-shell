@@ -1,0 +1,7 @@
+#!/bin/bash
+for pid in $(ls /proc | grep -E "^[0-9]+$"); do
+    cmdline=$(cat /proc/"$pid"/comm 2>/dev/null)
+    if [[ "$cmdline" == *bash* ]]; then
+        echo "$pid $cmdline"
+    fi
+done
